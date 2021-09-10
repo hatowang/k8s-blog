@@ -1,7 +1,7 @@
 ## client-go源码分析
 
-##1.什么是client-go
-    client-go是访问k8s的资源的客户端，即通过client-go实现对k8s集群中的资源对象进行增删改查等操作。
+## 1.什么是client-go
+client-go是访问k8s的资源的客户端，即通过client-go实现对k8s集群中的资源对象进行增删改查等操作。
 以下是一段使用案例。代码来自pkg/kubelet/kubelet.go
 ````
 		kubeInformers := informers.NewSharedInformerFactoryWithOptions(kubeDeps.KubeClient, 0, informers.WithTweakListOptions(func(options *metav1.ListOptions) {
@@ -15,7 +15,7 @@
 		klog.InfoS("Attempting to sync node with API server")
 ````
 
-###1. NewSharedInformerFactoryWithOptions
+### 1. NewSharedInformerFactoryWithOptions
 ````
 // NewSharedInformerFactoryWithOptions constructs a new instance of a SharedInformerFactory with additional options.
 func NewSharedInformerFactoryWithOptions(client kubernetes.Interface, defaultResync time.Duration, options ...SharedInformerOption) SharedInformerFactory {
@@ -78,7 +78,7 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 }
 ````
 
-#### 2.2 V1 s
+#### 2.2 V1方法
 ````
 // V1 returns a new v1.Interface.
 func (g *group) V1() v1.Interface {
@@ -199,14 +199,14 @@ func NewSharedIndexInformer(lw ListerWatcher, exampleObject runtime.Object, defa
 
 ````
 
-###2. nodeHasSynced，delegates to the Config's Queue
+### 2. nodeHasSynced，delegates to the Config's Queue
 ````
 nodeHasSynced = func() bool {
 			return kubeInformers.Core().V1().Nodes().Informer().HasSynced()
 		}
 ````
 
-###3. 开启SharedInformerFactory对象的主逻辑
+### 3. 开启SharedInformerFactory对象的主逻辑
 ````
 kubeInformers.Start(wait.NeverStop)
 
