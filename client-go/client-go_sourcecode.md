@@ -1,4 +1,4 @@
-## client-go源码分析
+# client-go源码分析
 
 ## 1.什么是client-go
 client-go是访问k8s的资源的客户端，即通过client-go实现对k8s集群中的资源对象进行增删改查等操作。
@@ -14,6 +14,8 @@ client-go是访问k8s的资源的客户端，即通过client-go实现对k8s集�
 		kubeInformers.Start(wait.NeverStop)
 		klog.InfoS("Attempting to sync node with API server")
 ````
+
+## 2.源码分析
 
 ### 1. NewSharedInformerFactoryWithOptions
 ````
